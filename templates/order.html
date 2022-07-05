@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This website allows vehicle owners to generate a QR code for their vehicles and for scanning QR code placed on the to contact vehicle's owner.">
+    <title>QRify | Order</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="icon" href="../static/Images/favicon-16x16.png" sizes="16x16" type="image/png"> 
+</head>
+<body>
+         
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{url_for('home')}}"><img src="../static/Images/small-logo.jpeg" alt="logo" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('signup')}}">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('login')}}">Log In</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <h3 class="sticker-header">
+    Get sticker for your vehicle!
+  </h3>
+  <div class="container poster-container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <h3 class="order-header">
+          Order Your Sticker at 30 RS/-
+        </h3>
+        <form onsubmit="return validate()" action="{{url_for('order')}}" method="POST" class="order-form">
+          {%with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %} 
+                        <p class="err-msg" style="color:red;">{{message}}</p>
+                    {% endfor %} 
+                {% endif %}
+            {% endwith %}
+          <input type="text" id="name"  class="form-control mt-3" name="name" placeholder="Your Name">
+          <p id="n-p" style="color:red; display:none;">Invalid Name</p>
+          <input type="email" id="email"  class="form-control mt-3" name="email" placeholder="Your Email">
+          <p id="e-p" style="color:red; display:none;">Invalid Email Address</p>
+          <input type="text" id="phone" class="form-control mt-3" name="phone" placeholder="Your Contact Number">
+          <p id="p-p" style="color:red; display:none;">Invalid Contact Number</p>
+          <input type="text" id="vehicle" class="form-control mt-3" name="vehicle" placeholder="Your Vehicle Number">
+          <p id="v-p" style="color:red; display:none;">Invalid vehicle number</p>
+          <input type="text" id="address" class="form-control mt-3" name="address" placeholder="Your Address">
+          <p id="a-p" style="color:red; display:none;">Invalid Email Address</p>
+          <input type="submit" value="Order Now" style="background-color:#0000e6;color:white;padding:4px 10px;" class="btn btn-lg mt-3">
+        </form>
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-12">
+        <img src="../static/Images/scan to contact the owner.png" class="poster" style="margin-top:30px;" alt="poster">
+      </div>
+    </div>
+  </div>
+
+  
+
+  <section id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-lg-3 col-sm-12">
+          <img src="../static/Images/small-logo.jpeg" alt="logo" style="height:90px;" class="footer-logo mx-auto"><br>
+          <div class="social-btns mt-5">
+            <a href="https://www.facebook.com/Qrifyin-100537728815817"><i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/qrify.in/">
+              <i class="fa fa-2x fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="https://chatwith.io/s/6066c1b2a81e6">
+              <i class="fa fa-2x fa-whatsapp" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-12">
+          <h6>
+            Become a member
+          </h6>
+          <ul class="footer-ul">
+            <li class="footer-links">
+              <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{url_for('signup')}}">Register</a>
+            </li>
+            <li class="footer-links">
+              <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{url_for('login')}}">Log In</a>
+            </li>
+            </ul>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-12">
+          <h6>
+            Support
+          </h6>
+          <ul class="footer-ul">
+            <li class="footer-links">
+              <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{url_for('home')}}">Home</a>
+            </li>
+            <li class="footer-links">
+              <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{url_for('help')}}">Help</a>
+            </li>
+            <li class="footer-links">
+              <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{url_for('contact')}}">Contact Us</a>
+            </li>
+            <li class="footer-links">
+              <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{url_for('feedback')}}">Give Us Feedback</a>
+            </li>
+            <li class="footer-links">
+              <i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{url_for('order')}}">Order Your Sticker</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-12">
+          <h5>
+            Stay updated with us!
+          </h5>
+          <form onsubmit="return validate2()" action="{{url_for('newslatter')}}" method="POST">
+            <input type="email" id="email2" placeholder="Enter your email address" class="form-control" required name="email">
+            <p id="ep" style="color:red;display:none;">Invalid Email</p>
+            <input type="submit" class="btn btn-lg mt-3" value="Submit" style="background-color:#0000e6;color:white;padding:4px 10px;">
+          </form>
+        </div>
+      </div>
+      <p class="love">
+        Made with <span style="color:red;">❤</span> in India
+        <hr class="footer-hr" style="text-align:center;">
+      </p>
+      <p class="copyright">
+        copyright &copy; 2021 All rights reserved
+    </p>
+    </div>
+
+    
+  </section>
+  <a href="https://chatwith.io/s/6066c1b2a81e6" class="whatsaap"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+
+  <script>
+    function validate(){
+      
+      var email2 = document.getElementById("email").value;
+      var phone =document.getElementById("phone").value;
+      var name = document.getElementById("name");
+      var vehicle = document.getElementById("vehicle");
+      var address = document.getElementById("address");
+      var mobileregex = /^[5-9]\d{9}$/;
+      var emailregex = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9\-]+)([a-z]{2,8})(.[a-zA-Z]{2,8})?$/;
+      if(name.value.trim() == ""){
+        name.style.border = "2px solid red";
+        document.getElementById("n-p").style.display = "block";
+        return false;
+      } 
+      if (emailregex.test(email2) == false){
+        document.getElementById("email").style.border = "2px solid red";
+        document.getElementById("e-p").style.display = "block";
+        return false;
+      }
+      if(mobileregex.test(phone) == false){
+        document.getElementById("phone").style.border = "2px solid red";
+        document.getElementById("p-p").style.display = "block";
+        return false;
+      }  if(vehicle.value.trim().length>10){
+        vehicle.style.border = "2px solid red";
+        document.getElementById("v-p").style.display = "block";
+        return false;
+      } if(address.value.trim() == ""){
+        address.style.border = "2px solid red";
+        document.getElementById("a-p").display = "block";
+        return false;
+      }
+    }
+
+    function validate2(){
+      var email = document.getElementById("email2").value;
+      var emailregex = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9\-]+)([a-z]{2,8})(.[a-zA-Z]{2,8})?$/;
+      if(emailregex.test(email) == false){
+          document.getElementById("email2").style.border = "2px solid red";
+          document.getElementById("ep").style.display = "block";
+          return false;
+        }
+    }
+  </script>
+        
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

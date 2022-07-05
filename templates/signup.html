@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign Up to QRify. Generate and order QR sticker for your vehicles!">
+    <meta name="title" content="Sign Up">
+    <title>Sign Up</title>
+    <meta name="keywords" content="generate QR code, register, sign up">
+    <meta name="og:title" content="Sign Up">
+    <meta itemprop="name" content="QRify">
+    <meta itemprop="description" content="Sign Up">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/signupstyle.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="icon" href="../static/Images/favicon-16x16.png" sizes="16x16" type="image/png"> 
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-12">
+
+            </div>
+            <div class="col-md-8 col-lg-8 col-sm-12">
+                <h1 class="create-header">
+                    <strong>Create a new account</strong>
+                </h1>
+                <h4 class="inner-header">
+                    It is free and easy!
+                </h4>
+                <form onsubmit="return validate()" action="{{url_for('signup')}}" method="POST" style="margin-top:50px;">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="John">
+                        <p id="fp" style="color:red;display:none;">Invalid First Name</p>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Doe">
+                        <p id="lp" style="color:red;display:none;">Invalid Last Name</p>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                          <input type="email" id="email" name="email" class="form-control" placeholder="example@gmail.com" >
+                          <p id="ep" style="color:red;display:none;">Invalid Email</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                          <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                          <p id="pp" style="color:red;display:none;">Password must be greater than 8 characters</p>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="contact">Contact Number</label>
+                          <input type="text" id="contact" name="phone" class="form-control" placeholder="Contact Number">
+                          <p id="cp" style="color:red;display:none;">Invalid Contact Number</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="vehicle">Vehicle Number</label>
+                          <input type="text" id="vehicle" name="vehicle" class="form-control" placeholder="GJ01SM6020">
+                          <small>Enter vehicle number without spaces!</small>
+                          <p id="vp" style="color:red;display:none;">Invalid Vehicle Number</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicle">Address</label>
+                        <input type="text" class="form-control" name="address" id="inputAddress" placeholder="1753 Main Street">
+                        <small>The address will not share anywhere!</small>
+                      </div>
+                    
+                      <p style="font-size:13px;">By clicking Sign Up,you agree to our data policy.you<br> may receive emails from us!</p>
+                    
+                   
+                    
+                    <button type="submit" class="btn btn-lg signup">Sign Up</button>
+                  </form>
+                  <a class="login" href="{{url_for('login')}}">Already have an account?</a>
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12">
+
+            </div>
+        </div>
+    </div>
+
+    <a href="https://chatwith.io/s/6066c1b2a81e6" class="whatsaap"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+
+    <script>
+      function validate(){
+        var firstname = document.getElementById("firstname");
+        var lastname = document.getElementById("lastname");
+        var email = document.getElementById("email").value;
+        var contact = document.getElementById("contact").value;
+        var pwd = document.getElementById("password");
+        var vehicle = document.getElementById("vehicle");
+        var address = document.getElementById("inputAddress");
+
+        var emailregex = /^([a-zA-Z0-9\.-]+)@([a-zA-Z0-9\-]+)([a-z]{2,8})(.[a-zA-Z]{2,8})?$/;
+        var mobileregex = /^[5-9]\d{9}$/;
+        // var vehicleregex = /^([a-zA-Z]{2})([0-9]{2})([0-9]{4})$/;
+        if (firstname.value.trim() == ""){
+          firstname.style.border = "2px solid red";
+          document.getElementById("fp").style.display = "block";
+          return false;
+        }if(lastname.value.trim() == ""){
+          lastname.style.border = "2px solid red";
+          document.getElementById("lp").style.display = "block";
+          return false;
+        }if(emailregex.test(email) == false){
+          document.getElementById("email").style.border = "2px solid red";
+          document.getElementById("ep").style.display = "block";
+          return false;
+        }
+        if(mobileregex.test(contact) == false){
+          document.getElementById("contact").style.border = "2px solid red";
+          document.getElementById("cp").style.display = "block";
+          return false;
+        }
+        if(pwd.value.trim().length<8){
+          pwd.style.border = "2px solid red";
+          document.getElementById("pp").style.display = "block";
+          return false;
+        }if(vehicle.value.trim().length>10){
+          document.getElementById("vehicle").style.border = "2px solid red";
+          document.getElementById("vp").style.display = "block";
+          return false;
+        }
+        if(address.value.trim() == ""){
+          address.style.border = "2px solid red";
+          document.getElementById("ap").style.display = "block";
+          return false;
+        } 
+        
+      }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+</body>
+</html>

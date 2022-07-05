@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Log in to QRify to access your data.">
+    <meta name="title" content="Log In">
+    <title>Log In</title>
+    <meta name="keywords" content="dashboard,your details,QR code for vehicles, log in">
+    <meta name="og:title" content="Log In">
+    <meta itemprop="name" content="QRify">
+    <meta itemprop="description" content="Log In">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/loginstyle.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="icon" href="../static/Images/favicon-16x16.png" sizes="16x16" type="image/png"> 
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-lg-4 col-sm-12">
+
+            </div>
+            
+            <div class="col-md-6 col-lg-4 col-sm-12 ">
+                <div class="second">
+                <img src="../static/Images/small-logo.jpeg" style="height:70px;margin:5% 28%;">
+                {%with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %} 
+                        <p class="err-msg" style="color:red;">{{message}}</p>
+                    {% endfor %} 
+                {% endif %}
+            {% endwith %}
+                <form action="{{url_for('login')}}" method="POST" class="mx-auto" style="text-align: center;">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required>
+                    <input type="password" id="pwd" name="password" class="form-control" placeholder="Password" required>
+                    <input type="submit" value="Log In" class="btn btn-block submit-btn mx-auto">
+                </form>
+                <p class="forgot-p">
+                    <a href="{{url_for('forget')}}" class="forgot-pwd mx-auto" style="text-align:center;">Forgot password?</a>
+                </p>
+                <hr>
+                <p>
+                    <a href="{{url_for('signup')}}" class="signup-btn" style="text-decoration: none;">
+                        <button class="btn btn-block create-btn mx-auto"> <strong>Create New Account</strong></button> 
+                    </a>
+                </p>
+                
+            </div>
+        </div>
+            
+            <div class="col-md-3 col-lg-4 col-sm-12">
+                
+            </div>
+        </div>
+    </div>
+
+    <a href="https://chatwith.io/s/6066c1b2a81e6" class="whatsaap"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
